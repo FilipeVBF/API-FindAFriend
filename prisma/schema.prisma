@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PetType {
+  DOG
+  CAT
+}
+
+enum Age {
+  PUPPY
+  ADULT
+  SENIOR
+}
+
+enum Size {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum IndependenceLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum EnvironmentType {
+  SMALL_SPACE
+  LARGE_SPACE
+}
+
+model Org {
+  id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  responsible_name String
+  email            String  @unique
+  password_hash    String
+  whatsapp         String
+  cep              String
+  address          String
+  city             String
+  state            String
+  latitude         Decimal?
+  longitude        Decimal?
+
+  created_at    DateTime @default(now())
+
+  pets             Pet[]
+
+  @@map("orgs")
+}
+
+model Pet {
+  id                 String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String
+  type               PetType  @default(DOG)
+  age                Age  @default(PUPPY)
+  about              String  
+  size               Size  @default(SMALL)
+  energy_level       Int
+  independence_level IndependenceLevel  @default(LOW)
+  environment_type   EnvironmentType  @default(SMALL_SPACE)
+
+  created_at    DateTime @default(now())
+  
+  org                Org  @relation(fields: [org_id], references: [id])
+  org_id             String @db.Uuid
+
+  photos             PetPhoto[]
+  adoption_requirements       AdoptionRequirement[]
+
+  @@map("pets")
+}
+
+model PetPhoto {
+  id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  url     String
+  
+  pet     Pet    @relation(fields: [pet_id], references: [id])
+  pet_id  String @db.Uuid
+
+  @@map("pet_photos")
+}
+
+model AdoptionRequirement {
+  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description   String
+  
+  pet_id  String @db.Uuid
+  pet     Pet    @relation(fields: [pet_id], references: [id])
+
+  @@map("adoption_requirements")
+}
