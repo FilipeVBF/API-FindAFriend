@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { RegisterUseCase } from "./register.js";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository.js";
 import { CreatePetUseCase } from "./create-pet.js";
 

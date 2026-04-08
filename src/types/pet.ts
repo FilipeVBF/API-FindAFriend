@@ -1,5 +1,3 @@
-// src/types/pet.ts
-
 export type PetType = "DOG" | "CAT";
 export type Age = "PUPPY" | "ADULT" | "SENIOR";
 export type Size = "SMALL" | "MEDIUM" | "LARGE";
@@ -46,13 +44,3 @@ export interface CreatePetInput {
   photos?: string[] | undefined;
   adoption_requirements?: string[] | undefined;
 }
-
-// export interface CreateAdoptionRequirementInput {
-//   description: string;
-//   pet_id: string;
-// }
-
-// export interface CreatePetPhotoInput {
-//   url: string;
-//   pet_id: string;
-// }

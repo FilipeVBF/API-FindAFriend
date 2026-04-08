@@ -1,7 +1,7 @@
 import type { OrgsRepository } from "../orgs-repository.js";
-import type { Prisma } from "generated/prisma/client.js";
 import { randomUUID } from "node:crypto";
 import type { Org } from "@/types/org.js";
+import type { Prisma } from "../../../generated/prisma/client.js";
 
 export class InMemoryOrgsRepository implements OrgsRepository {
   public items: Org[] = [];

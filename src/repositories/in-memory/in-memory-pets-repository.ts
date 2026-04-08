@@ -1,8 +1,8 @@
-import type { Prisma } from "generated/prisma/client.js";
 import type { PetsRepository, SearchPetsQuery } from "../pets-repository.js";
 import { randomUUID } from "node:crypto";
 import type { Org } from "@/types/org.js";
 import type { AdoptionRequirement, Pet, PetPhoto } from "@/types/pet.js";
+import type { Prisma } from "../../../generated/prisma/client.js";
 
 export class InMemoryPetsRepository implements PetsRepository {
   public orgs: Org[] = [];

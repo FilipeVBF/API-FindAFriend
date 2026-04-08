@@ -8,7 +8,7 @@ import type {
   PetType,
   Size,
 } from "@/types/pet.js";
-import type { Prisma } from "generated/prisma/client.js";
+import type { Prisma } from "../../generated/prisma/client.js";
 
 export interface SearchPetsQuery {
   city: string;

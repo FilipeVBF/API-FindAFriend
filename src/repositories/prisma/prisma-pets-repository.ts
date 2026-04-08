@@ -4,7 +4,7 @@ import type {
   AdoptionRequirementUncheckedCreateInput,
   PetPhotoUncheckedCreateInput,
   PetUncheckedCreateInput,
-} from "generated/prisma/models.js";
+} from "../../../generated/prisma/models.js";
 
 export class PrismaPetsRepository implements PetsRepository {
   async findById(id: string) {

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma.js";
 import type { OrgsRepository } from "../orgs-repository.js";
-import type { OrgCreateInput } from "generated/prisma/models.js";
+import type { OrgCreateInput } from "../../../generated/prisma/models.js";
 
 export class PrismaOrgsRepository implements OrgsRepository {
   async findById(id: string) {
