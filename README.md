@@ -2,6 +2,8 @@
 
 A **Find A Friend** é uma plataforma desenvolvida para facilitar o processo de adoção de animais, conectando pessoas interessadas a Organizações (ORGs) responsáveis. Este projeto foi construído para consolidar conhecimentos em **SOLID**, **Testes Automatizados (TDD)** e **Arquitetura de Software**.
 
+---
+
 ## Sobre o Projeto
 
 O sistema permite que ORGs cadastrem animais disponíveis para adoção, detalhando características como porte, idade e nível de energia. Para quem deseja adotar, a API oferece um sistema de busca refinado por localização e filtros específicos, facilitando o encontro do "match" ideal com um pet.
