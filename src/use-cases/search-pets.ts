@@ -2,7 +2,7 @@ import type {
   PetsRepository,
   SearchPetsQuery,
 } from "@/repositories/pets-repository.js";
-import type { Pet } from "generated/prisma/client.js";
+import type { Pet } from "@/types/pet.js";
 
 type SearchPetsUseCaseRequest = SearchPetsQuery;
 

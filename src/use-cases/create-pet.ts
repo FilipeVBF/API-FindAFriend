@@ -8,7 +8,7 @@ import type {
   PetPhoto,
   PetType,
   Size,
-} from "generated/prisma/client.js";
+} from "@/types/pet.js";
 
 interface CreatePetUseCaseRequest {
   name: string;

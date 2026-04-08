@@ -1,4 +1,5 @@
-import type { Org, Prisma } from "generated/prisma/client.js";
+import type { Org } from "@/types/org.js";
+import type { Prisma } from "generated/prisma/client.js";
 
 export interface OrgsRepository {
   findById(id: string): Promise<Org | null>;

@@ -1,9 +1,5 @@
 import type { PetsRepository } from "@/repositories/pets-repository.js";
-import type {
-  AdoptionRequirement,
-  Pet,
-  PetPhoto,
-} from "generated/prisma/client.js";
+import type { AdoptionRequirement, Pet, PetPhoto } from "@/types/pet.js";
 
 interface GetPetDetailsUseCaseRequest {
   pet_id: string;

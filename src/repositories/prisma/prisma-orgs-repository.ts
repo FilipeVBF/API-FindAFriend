@@ -10,7 +10,13 @@ export class PrismaOrgsRepository implements OrgsRepository {
       },
     });
 
-    return org;
+    if (!org) return null;
+
+    return {
+      ...org,
+      latitude: org.latitude ? org.latitude.toNumber() : null,
+      longitude: org.longitude ? org.longitude.toNumber() : null,
+    };
   }
 
   async findByEmail(email: string) {
@@ -20,7 +26,13 @@ export class PrismaOrgsRepository implements OrgsRepository {
       },
     });
 
-    return org;
+    if (!org) return null;
+
+    return {
+      ...org,
+      latitude: org.latitude ? org.latitude.toNumber() : null,
+      longitude: org.longitude ? org.longitude.toNumber() : null,
+    };
   }
 
   async create(data: OrgCreateInput) {
@@ -28,6 +40,10 @@ export class PrismaOrgsRepository implements OrgsRepository {
       data,
     });
 
-    return org;
+    return {
+      ...org,
+      latitude: org.latitude ? org.latitude.toNumber() : null,
+      longitude: org.longitude ? org.longitude.toNumber() : null,
+    };
   }
 }

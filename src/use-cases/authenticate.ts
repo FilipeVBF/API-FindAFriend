@@ -1,7 +1,7 @@
 import type { OrgsRepository } from "@/repositories/orgs-repository.js";
 import { compare } from "bcryptjs";
-import type { Org } from "generated/prisma/client.js";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error.js";
+import type { Org } from "@/types/org.js";
 
 interface AuthenticateUseCaseRequest {
   email: string;

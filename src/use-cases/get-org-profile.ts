@@ -1,5 +1,5 @@
 import type { OrgsRepository } from "@/repositories/orgs-repository.js";
-import type { Org } from "generated/prisma/client.js";
+import type { Org } from "@/types/org.js";
 
 interface GetOrgProfileUseCaseRequest {
   orgId: string;

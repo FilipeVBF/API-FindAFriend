@@ -1,8 +1,8 @@
 import type { OrgsRepository } from "@/repositories/orgs-repository.js";
 import { hash } from "bcryptjs";
-import type { Org } from "generated/prisma/client.js";
 import { OrgAlreadyExistsError } from "./errors/org-already-exists-error.js";
 import { MissingRequiredFieldError } from "./errors/missing-required-field-error.js";
+import type { Org } from "@/types/org.js";
 
 interface RegisterUseCaseRequest {
   responsible_name: string;

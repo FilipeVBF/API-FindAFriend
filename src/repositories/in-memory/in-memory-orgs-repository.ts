@@ -1,7 +1,7 @@
 import type { OrgsRepository } from "../orgs-repository.js";
-import type { Org, Prisma } from "generated/prisma/client.js";
+import type { Prisma } from "generated/prisma/client.js";
 import { randomUUID } from "node:crypto";
-import { Decimal } from "@prisma/client/runtime/index-browser";
+import type { Org } from "@/types/org.js";
 
 export class InMemoryOrgsRepository implements OrgsRepository {
   public items: Org[] = [];
@@ -37,8 +37,8 @@ export class InMemoryOrgsRepository implements OrgsRepository {
       address: data.address,
       city: data.city,
       state: data.state,
-      latitude: data.latitude ? new Decimal(data.latitude.toString()) : null,
-      longitude: data.longitude ? new Decimal(data.longitude.toString()) : null,
+      latitude: data.latitude ? parseFloat(data.latitude.toString()) : null,
+      longitude: data.longitude ? parseFloat(data.longitude.toString()) : null,
       created_at: new Date(),
     };
 
