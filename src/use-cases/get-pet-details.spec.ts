@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryPetsRepository } from "@/repositories/in-memory/in-memory-pets-repository.js";
-import { GetPetUseCase } from "./get-pet.js";
+import { GetPetDetailsUseCase } from "./get-pet-details.js";
 
 let petsRepository: InMemoryPetsRepository;
-let sut: GetPetUseCase;
+let sut: GetPetDetailsUseCase;
 
 describe("Get Pet Use Case", () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository();
-    sut = new GetPetUseCase(petsRepository);
+    sut = new GetPetDetailsUseCase(petsRepository);
   });
 
   it("should be able to get pet details", async () => {

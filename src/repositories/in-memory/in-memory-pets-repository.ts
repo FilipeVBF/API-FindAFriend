@@ -1,13 +1,15 @@
 import type {
   AdoptionRequirement,
+  Org,
   Pet,
   PetPhoto,
   Prisma,
 } from "generated/prisma/client.js";
-import type { PetsRepository } from "../pets-repository.js";
+import type { PetsRepository, SearchPetsQuery } from "../pets-repository.js";
 import { randomUUID } from "node:crypto";
 
 export class InMemoryPetsRepository implements PetsRepository {
+  public orgs: Org[] = [];
   public items: Pet[] = [];
   public adoptionRequirements: AdoptionRequirement[] = [];
   public petPhotos: PetPhoto[] = [];
@@ -76,5 +78,45 @@ export class InMemoryPetsRepository implements PetsRepository {
     this.petPhotos.push(petPhoto);
 
     return petPhoto;
+  }
+
+  async searchMany(query: SearchPetsQuery) {
+    const {
+      city,
+      state,
+      page,
+      type,
+      age,
+      size,
+      energy_level,
+      independence_level,
+      environment_type,
+    } = query;
+
+    const orgsInLocation = this.orgs.filter(
+      (org) => org.city === city && org.state === state,
+    );
+    const orgsIds = orgsInLocation.map((org) => org.id);
+
+    const filteredPets = this.items
+      .filter((pet) => {
+        if (!orgsIds.includes(pet.org_id)) {
+          return false;
+        }
+
+        if (type && pet.type !== type) return false;
+        if (age && pet.age !== age) return false;
+        if (size && pet.size !== size) return false;
+        if (energy_level && pet.energy_level !== energy_level) return false;
+        if (independence_level && pet.independence_level !== independence_level)
+          return false;
+        if (environment_type && pet.environment_type !== environment_type)
+          return false;
+
+        return true;
+      })
+      .slice((page - 1) * 20, page * 20);
+
+    return filteredPets;
   }
 }

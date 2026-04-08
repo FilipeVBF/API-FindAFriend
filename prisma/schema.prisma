@@ -43,9 +43,9 @@ enum EnvironmentType {
 
 model Org {
   id               String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  responsible_name String
   email            String  @unique
   password_hash    String
+  responsible_name String
   whatsapp         String
   cep              String
   address          String

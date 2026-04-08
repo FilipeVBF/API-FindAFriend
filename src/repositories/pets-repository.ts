@@ -1,9 +1,26 @@
 import type {
   AdoptionRequirement,
+  Age,
+  EnvironmentType,
+  IndependenceLevel,
   Pet,
   PetPhoto,
+  PetType,
   Prisma,
+  Size,
 } from "generated/prisma/client.js";
+
+export interface SearchPetsQuery {
+  city: string;
+  state: string;
+  type?: PetType | undefined;
+  age?: Age | undefined;
+  size?: Size | undefined;
+  energy_level?: number | undefined;
+  independence_level?: IndependenceLevel | undefined;
+  environment_type?: EnvironmentType | undefined;
+  page: number;
+}
 
 export interface PetsRepository {
   findById(id: string): Promise<Pet | null>;
@@ -15,4 +32,6 @@ export interface PetsRepository {
   ): Promise<AdoptionRequirement>;
 
   addPetPhoto(data: Prisma.PetPhotoUncheckedCreateInput): Promise<PetPhoto>;
+
+  searchMany(query: SearchPetsQuery): Promise<Pet[]>;
 }

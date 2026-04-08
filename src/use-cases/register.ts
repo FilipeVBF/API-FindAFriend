@@ -1,6 +1,8 @@
 import type { OrgsRepository } from "@/repositories/orgs-repository.js";
 import { hash } from "bcryptjs";
 import type { Org } from "generated/prisma/client.js";
+import { OrgAlreadyExistsError } from "./errors/org-already-exists-error.js";
+import { MissingRequiredFieldError } from "./errors/missing-required-field-error.js";
 
 interface RegisterUseCaseRequest {
   responsible_name: string;
@@ -11,8 +13,8 @@ interface RegisterUseCaseRequest {
   address: string;
   city: string;
   state: string;
-  latitude?: number;
-  longitude?: number;
+  latitude?: number | null;
+  longitude?: number | null;
 }
 
 interface RegisterUseCaseResponse {
@@ -39,13 +41,11 @@ export class RegisterUseCase {
     const orgWithSameEmail = await this.orgRepository.findByEmail(email);
 
     if (orgWithSameEmail) {
-      // Criar um erro personalizado
-      throw new Error("E-mail already in use.");
+      throw new OrgAlreadyExistsError();
     }
 
     if (!whatsapp || !cep || !address || !city || !state) {
-      // Criar um erro personalizado
-      throw new Error("Missing required fields.");
+      throw new MissingRequiredFieldError();
     }
 
     const org = await this.orgRepository.create({

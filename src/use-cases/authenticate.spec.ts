@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryOrgsRepository } from "@/repositories/in-memory/in-memory-orgs-repository.js";
 import { AuthenticateUseCase } from "./authenticate.js";
 import { hash } from "bcryptjs";
+import { InvalidCredentialsError } from "./errors/invalid-credentials-error.js";
 
 let orgsRepository: InMemoryOrgsRepository;
 let sut: AuthenticateUseCase;
@@ -49,7 +50,7 @@ describe("Authenticate Use Case", () => {
         email: "johndoe@example.com",
         password: "wrongpassword",
       }),
-    ).rejects.toThrow();
+    ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
 
   it("should not be able to authenticate with wrong email", async () => {
@@ -58,6 +59,6 @@ describe("Authenticate Use Case", () => {
         email: "wrongemail@example.com",
         password: "securepassword",
       }),
-    ).rejects.toThrow();
+    ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
 });

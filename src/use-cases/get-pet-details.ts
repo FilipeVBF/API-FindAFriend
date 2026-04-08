@@ -1,20 +1,15 @@
 import type { PetsRepository } from "@/repositories/pets-repository.js";
 import type {
   AdoptionRequirement,
-  Age,
-  EnvironmentType,
-  IndependenceLevel,
   Pet,
   PetPhoto,
-  PetType,
-  Size,
 } from "generated/prisma/client.js";
 
-interface GetPetUseCaseRequest {
+interface GetPetDetailsUseCaseRequest {
   pet_id: string;
 }
 
-interface GetPetUseCaseResponse {
+interface GetPetDetailsUseCaseResponse {
   pet: Pet & {
     adoption_requirements?: AdoptionRequirement[];
   } & {
@@ -22,12 +17,12 @@ interface GetPetUseCaseResponse {
   };
 }
 
-export class GetPetUseCase {
+export class GetPetDetailsUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({
     pet_id,
-  }: GetPetUseCaseRequest): Promise<GetPetUseCaseResponse> {
+  }: GetPetDetailsUseCaseRequest): Promise<GetPetDetailsUseCaseResponse> {
     const pet = await this.petsRepository.findById(pet_id);
 
     if (!pet) {

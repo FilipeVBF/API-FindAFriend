@@ -1,6 +1,7 @@
 import type { OrgsRepository } from "@/repositories/orgs-repository.js";
 import { compare } from "bcryptjs";
 import type { Org } from "generated/prisma/client.js";
+import { InvalidCredentialsError } from "./errors/invalid-credentials-error.js";
 
 interface AuthenticateUseCaseRequest {
   email: string;
@@ -21,15 +22,13 @@ export class AuthenticateUseCase {
     const org = await this.orgRepository.findByEmail(email);
 
     if (!org) {
-      // Criar um erro personalizado
-      throw new Error("Invalid credentials.");
+      throw new InvalidCredentialsError();
     }
 
     const isPasswordValid = await compare(password, org.password_hash);
 
     if (!isPasswordValid) {
-      // Criar um erro personalizado
-      throw new Error("Invalid credentials.");
+      throw new InvalidCredentialsError();
     }
 
     return { org };
