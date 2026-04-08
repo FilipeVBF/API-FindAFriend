@@ -25,3 +25,50 @@
 - [ ] Deve ser possível listar pets, exigindo a cidade como parâmetro obrigatório
 - [ ] Deve ser possível listar pets, por filtros opcionais de características dos pets
 - [ ] Deve ser possível buscar detalhes de um pet por seu ID
+
+
+## 🚀 Como Executar o Projeto
+
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone [https://github.com/FilipeVBF/API-FindAFriend.git](https://github.com/FilipeVBF/API-FindAFriend.git)
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+3.  **Configuração do Ambiente:**
+    - Crie e configure o arquivo .env baseado no .env.example.
+
+4.  **Banco de Dados:**
+    - Inicia os containers em background.
+
+    ```bash
+    docker compose up -d
+    ```
+
+5.  **Migrations e Prisma:**
+    - Gera o cliente do Prisma.
+
+    ```bash
+    npm run prisma:generate
+    ```
+
+    - Executa as migrations para criar as tabelas.
+
+    ```bash
+    npm run prisma:migrate
+    ```
+
+6.  **Inicie a aplicação:**
+
+    ```bash
+    npm run dev
+    ```
+
+7.  **Testes:**
+    ```bash
+    npm run test
+    ```
